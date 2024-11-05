@@ -6,14 +6,21 @@
     <title>Interval Timer</title>
 </head>
 <body>
-    <label for="intervals">Number of Intervals:</label>
+    <!-- <label for="intervals">Number of Intervals:</label>
 
-    <select name="intervals" id="intervalSelector">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-    </select>
+    <select name="intervals" id="userChosenIntervals">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select> -->
+    <input type="number" id='userChosenIntervals'placeholder="# of Intervals">
+    <input type="number" id='userChosenHours'placeholder="Hours">
+    <input type="number" id='userChosenMinutes'placeholder="Minutes">
+    <input type="number" id='userChosenSeconds'placeholder="Seconds">
+    <button onClick="chooseInterval()">Confirm Interval</button>
+    <button onClick="resetInterval()">Reset Interval</button>
+
 
     <div id="display">00:00:00.00</div>
     <button onclick="startStopwatch()">Start</button>

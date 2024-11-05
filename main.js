@@ -1,5 +1,27 @@
 let startTime, elapsedTime = 0, timerInterval;
 
+let userHours, userMinutes, userSeconds, userIntervals, currentInterval
+
+function chooseInterval() {
+  userIntervals = document.getElementById('userChosenIntervals').value || 0
+  userHours = document.getElementById('userChosenHours').value || 0
+  userMinutes = document.getElementById('userChosenMinutes').value || 0
+  userSeconds = document.getElementById('userChosenSeconds').value || 0
+  let totalUserTime = (userHours * 3600000) + (userMinutes * 60000) + (userSeconds * 1000)
+  console.log(`${userIntervals} ${userIntervals == 1 ? 'interval': 'intervals'} of ${totalUserTime.toLocaleString()} milliseconds`)
+}
+
+function resetInterval() {
+  userIntervals = 0
+  userHours = 0
+  userMinutes = 0
+  userSeconds = 0
+  document.getElementById('userChosenIntervals').value = ""
+  document.getElementById('userChosenHours').value = ""
+  document.getElementById('userChosenMinutes').value = ""
+  document.getElementById('userChosenSeconds').value = ""
+}
+
 function startStopwatch() {
   if (timerInterval) {clearInterval(timerInterval)}  //prevents multiple intervals overlapping if you press start more than once
   startTime = Date.now() - elapsedTime;
