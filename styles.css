@@ -1,0 +1,15 @@
+/* body {
+
+} */
+.container {
+    display: flex;
+    justify-content: center;
+    height: 75vh;
+    align-items: center;
+}
+header {
+    text-align: center;
+}
+/* .workInputs {
+
+} */

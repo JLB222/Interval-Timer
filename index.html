@@ -3,31 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Interval Timer</title>
 </head>
 <body>
-    <!-- <label for="intervals">Number of Intervals:</label>
+  <header id="intervalSummary">Interval Summary</header>
 
-    <select name="intervals" id="userChosenIntervals">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select> -->
-    <input type="number" id='userChosenWorkIntervals'placeholder="# of Intervals">
-    <input type="number" id='userChosenWorkHours'placeholder="Work Hours">
-    <input type="number" id='userChosenWorkMinutes'placeholder="Work Minutes">
-    <input type="number" id='userChosenWorkSeconds'placeholder="Work Seconds">
-    <input type="number" id='userChosenRestHours'placeholder="Rest Hours">
-    <input type="number" id='userChosenRestMinutes'placeholder="Rest Minutes">
-    <input type="number" id='userChosenRestSeconds'placeholder="Rest Seconds">
-    <button onClick="chooseInterval()">Confirm Interval</button>
+  <div class="container">
+    <div class="workInputs">
+      <h2>Work Intervals</h2>
+      <input type="number" id='userChosenWorkIntervals'placeholder="# of Intervals">
+      <input type="number" id='userChosenWorkHours'placeholder="Work Hours">
+      <input type="number" id='userChosenWorkMinutes'placeholder="Work Minutes">
+      <input type="number" id='userChosenWorkSeconds'placeholder="Work Seconds">
+    </div>
+    <div class="timeDisplay">
+      <div id="display">0---00:00:00.00</div>
+      <button onclick="startStopwatch()">Start</button>
+      <button onclick="stopStopwatch()">Stop</button>
+      <button onclick="resetStopwatch()">Reset</button>
+      <button onClick="chooseInterval()">Confirm Interval</button>
+    </div>
+    <div class="restInputs">
+      <h2>Rest Intervals</h2>
+      <input type="number" id='userChosenRestHours'placeholder="Rest Hours">
+      <input type="number" id='userChosenRestMinutes'placeholder="Rest Minutes">
+      <input type="number" id='userChosenRestSeconds'placeholder="Rest Seconds">
+    </div>
+  </div>
+    
 
-    <div id="display">0---00:00:00.00</div>
-    <button onclick="startStopwatch()">Start</button>
-    <button onclick="stopStopwatch()">Stop</button>
-    <button onclick="resetStopwatch()">Reset</button>
+  <div class="container">
 
+  </div>
+    
     <footer>Beep sound effects by <a href="https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=104060">freesound_community</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=104060">Pixabay</a></footer>
     <script src="main.js"></script>
 

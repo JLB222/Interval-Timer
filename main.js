@@ -1,10 +1,13 @@
 let startTime, elapsedTime = 0, timerInterval;
 let userWorkHours, userWorkMinutes, userWorkSeconds, intervalsCompleted, totalUserWorkTime, totalUserRestTime
-let workInterval = true, restInterval = false;
+let workInterval = true
 let userChosenWorkIntervals, userChosenRestIntervals
 let userRestHours, userRestMinutes, userRestSeconds
 
-const beep = new Audio('sounds/beep-104060.mp3'); // Replace with your sound file path
+const startRestBeep = new Audio('sounds/softBeep.mp3');
+const startWorkBeep = new Audio('sounds/backToIt.mp3');
+const workoutCompleteBeep = new Audio('sounds/completionBeep.mp3'); 
+
 
 function chooseInterval() {
   userChosenWorkIntervals = document.getElementById('userChosenWorkIntervals').value || 0
@@ -20,6 +23,7 @@ function chooseInterval() {
   totalUserRestTime = (userRestHours * 3600000) + (userRestMinutes * 60000) + (userRestSeconds * 1000) || undefined
   intervalsCompleted = 0
   resetStopwatch()
+  document.getElementById('intervalSummary').innerHTML = `WORK: ${userChosenWorkIntervals == 0 ? 'Unlimited' : userChosenWorkIntervals} ${userChosenWorkIntervals == 1 ? 'interval': 'intervals'} of ${totalUserWorkTime?.toLocaleString()} milliseconds | REST: ${totalUserRestTime?.toLocaleString()} milliseconds`
   console.log(`${userChosenWorkIntervals} ${userChosenWorkIntervals == 1 ? 'interval': 'intervals'} of ${totalUserWorkTime?.toLocaleString()} milliseconds`)
 }
 
@@ -33,17 +37,18 @@ function startStopwatch() {
       if (elapsedTime >= totalUserWorkTime) {  //it's '>=' because '==' often failed to increment, probably due to the passed milliseconds not perfectly lining up with user defined time due to the interval() not firing EXACTLY every 10 milliseconds
         startTime = Date.now()
         intervalsCompleted++
-        beep.play()
+        startRestBeep.play()
         console.log(`Intervals Completed: ${intervalsCompleted}`)
         totalUserRestTime ? workInterval = false : null  //if user has chosen a rest interval, this will switch the code to 'rest mode' by switching workInterval to false, running the else code that does not increment the interval counter
         if (intervalsCompleted == userChosenWorkIntervals) {
+          workoutCompleteBeep.play()
           resetStopwatch()
         }
       };
     } else {
       if (elapsedTime >= totalUserRestTime) {  //it's '>=' because '==' often failed to increment, probably due to the passed milliseconds not perfectly lining up with user defined time due to the interval() not firing EXACTLY every 10 milliseconds
         startTime = Date.now()
-        beep.play()
+        startWorkBeep.play()
         console.log(`Rest time is over, get back to work!`)
         workInterval = true  //will end 'rest mode' by making workInterval true again, ensuring the next interval is incremented
       };
@@ -59,8 +64,8 @@ function stopStopwatch() {
 function resetStopwatch() {
   clearInterval(timerInterval);
   elapsedTime = 0;
-  intervalsCompleted = 0
-  workInterval = true
+  intervalsCompleted = 0;
+  workInterval = true;
   updateDisplay();
 }
 
@@ -77,6 +82,3 @@ function formatTime(time) {
   const milliseconds = time.getUTCMilliseconds().toString().slice(0, 2).padStart(2, '0');
   return `${intervalsCompleted}---${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
-
-//rest beeps that are different from workout beeps, so user knows by sound where they're at
-//final (different) beep for end of workout
